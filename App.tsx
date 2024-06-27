@@ -1,117 +1,75 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+const App = () => {
+  const [items, setItems] = useState([
+    { id: 1, name: 'Item 1' },
+    { id: 2, name: 'Item 2' },
+    { id: 3, name: 'Item 3' },
+    { id: 4, name: 'Item 4' },
+    { id: 5, name: 'Item 5' },
+    { id: 6, name: 'Item 6' },
+    { id: 7, name: 'Item 7' },
+    { id: 8, name: 'Item 8' },
+    { id: 9, name: 'Item 9' },
+    { id: 10, name: 'Item 10' },
+    { id: 11, name: 'Item 11' },
+    { id: 12, name: 'Item 12' },
+    { id: 13, name: 'Item 13' },
+    { id: 14, name: 'Item 14' },
+    { id: 15, name: 'Item 15' },
+    { id: 16, name: 'Item 16' },
+    { id: 17, name: 'Item 17' },
+    { id: 18, name: 'Item 18' },
+    { id: 19, name: 'Item 19' },
+    { id: 20, name: 'Item 20' },
+  ]);
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+  const renderItem = ({ id, name }) => (
+    <View key={id} style={styles.item}>
+      <Text style={styles.itemText}>{name}</Text>
     </View>
   );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Scrollable Item List</Text>
+      </View>
+      <ScrollView style={styles.scrollView}>
+        {items.map(item => renderItem(item))}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
+    paddingTop: 50,
   },
-  sectionTitle: {
+  header: {
+    marginBottom: 20,
+  },
+  headerText: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: 'bold',
   },
-  sectionDescription: {
-    marginTop: 8,
+  scrollView: {
+    width: '100%',
+  },
+  item: {
+    backgroundColor: '#f9c2ff',
+    padding: 20,
+    marginVertical: 8,
+    borderRadius: 10,
+  },
+  itemText: {
     fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
   },
 });
 
